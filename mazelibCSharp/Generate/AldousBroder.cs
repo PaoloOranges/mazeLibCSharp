@@ -129,6 +129,17 @@ namespace mazelibCSharp.Generate
 
             // Finilize making all uninitialized cell to walls
 
+            for (int i = 0; i < mazeHeight; ++i)
+            {
+                for (int j = 0; j < mazeWidth; ++j)
+                {
+                    // initialize border elements with Walls
+                    MazeCellType cellType = (i != 0 && i != mazeHeight - 1 && j != 0 && j != mazeWidth - 1) ? MazeCellType.Uninitialized : MazeCellType.Wall;
+
+                    grid[i, j] = (grid[i, j] == MazeCellType.Uninitialized) ? MazeCellType.Wall : grid[i, j];
+                }
+            }
+
             return grid;
         }
 
