@@ -1,6 +1,6 @@
 ﻿namespace mazelibCSharp.Generate
 {
-    public interface IMazeGeneratorAlgorithm
+    public interface IMazeGenerator
     {
         public MazeCellType[,] Generate(int height, int width);
     }

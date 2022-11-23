@@ -3,9 +3,10 @@ using mazelibCSharp.Generate;
 
 
 
-MazeGenAlgo mazeGen = new MazeGenAlgo(3, 3, new AldousBroder());
+MazeGenAlgo mazeGen = new MazeGenAlgo(5, 5, new AldousBroder());
 
-var result = mazeGen.Generate();
+mazeGen.Generate();
+var result = mazeGen.GenerateEntranceAndExit();
 
 
 for (int r = 0; r < result.GetLength(0); ++r)

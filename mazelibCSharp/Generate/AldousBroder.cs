@@ -7,7 +7,7 @@ namespace mazelibCSharp.Generate
     ///     2. Choose a random neighbor of the current cell and visit it.If the neighbor has not yet been visited, add the traveled edge to the spanning tree.
     ///     3. Repeat step 2 until all cells have been visited.
     /// </summary>
-    public class AldousBroder : IMazeGeneratorAlgorithm
+    public class AldousBroder : IMazeGenerator
     {
         /// <summary>
         /// highest-level method that implements the maze-generating algorithm
