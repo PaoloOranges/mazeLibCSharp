@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 
+using mazelibCSharp;
+
 namespace mazelibCSharp.Generate
 {
     /// <summary>
@@ -13,45 +15,6 @@ namespace mazelibCSharp.Generate
         /// highest-level method that implements the maze-generating algorithm
         /// <returns> array returned matrix </returns>
         /// </summary>
-        //public override int[,] Generate()
-        //{
-
-
-        //    while(numVisited < this.h * this.w)
-        //    {
-        //        var neighbours = this.FindNeighbours(crow, ccol, grid, true);
-        //        if(neighbours.Count == 0)
-        //        {
-        //            neighbours = FindNeighbours(crow, ccol, grid);
-        //            CellCoordinate cell = neighbours[rnd.Next(neighbours.Count)];
-        //            crow = cell.row;
-        //            ccol = cell.col;
-        //            continue;
-        //        }
-
-        //        // loop through the neighbours
-        //        foreach(CellCoordinate cell in neighbours)
-        //        {
-        //            if (grid[cell.row, cell.col] > 0)
-        //            {
-        //                // open up wall to new neighbor
-        //                grid[(cell.row + crow) / 2, (cell.col + ccol) / 2] = 0;
-        //                // mark neighbor as visited
-        //                grid[cell.row, cell.col] = 0;
-        //                // bump the number visited
-        //                numVisited++;
-        //                // current becomes new neighbor
-        //                crow = cell.row;
-        //                ccol = cell.col;
-        //                break;
-        //            }
-        //        }
-
-        //    }
-
-        //    return grid;
-        //}
-
         public MazeCellType[,] Generate(int height, int width)
         {
             // each maze cell will be 3x3 
@@ -80,7 +43,7 @@ namespace mazelibCSharp.Generate
 
             int totalMazeSize = height * width;
 
-            grid[MazeRowToGridRow(currentRow), MazeColToGridCol(currentCol)] = MazeCellType.Path;
+            grid[Utilities.MazeRowToGridRow(currentRow), Utilities.MazeColToGridCol(currentCol)] = MazeCellType.Path;
 
             int numVisited = 1;
 
@@ -88,13 +51,13 @@ namespace mazelibCSharp.Generate
             {
                 var neighbours = GetNeighboursCoordinateList(currentRow, currentCol, height, width);
 
-                int row = MazeRowToGridRow(currentRow);
-                int col = MazeColToGridCol(currentCol);
+                int row = Utilities.MazeRowToGridRow(currentRow);
+                int col = Utilities.MazeColToGridCol(currentCol);
 
                 foreach (var neighbour in neighbours)
                 {
-                    int nR = MazeRowToGridRow(neighbour.row);
-                    int nC = MazeColToGridCol(neighbour.col);
+                    int nR = Utilities.MazeRowToGridRow(neighbour.row);
+                    int nC = Utilities.MazeColToGridCol(neighbour.col);
 
                     currentRow = neighbour.row;
                     currentCol = neighbour.col;
@@ -141,16 +104,6 @@ namespace mazelibCSharp.Generate
             }
 
             return grid;
-        }
-
-        private int MazeRowToGridRow(int row)
-        {
-            return 3 * row + 1;
-        }
-
-        private int MazeColToGridCol(int col)
-        {
-            return 3 * col + 1;
         }
 
         private List<CellCoordinate> GetNeighboursCoordinateList(int row, int col, int height, int width)

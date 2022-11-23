@@ -37,39 +37,43 @@ namespace mazelibCSharp.Generate
             Random rnd = new Random();
             int side = rnd.Next(4); // 0: North, 1: East, 2: South, 3: West
 
+            int startRow = 0;
+            int startCol = 0;
+            int endRow = 0;
+            int endCol = 0;
+
             switch(side)
             {
                 case 0:
                     {
-                        int startCol = rnd.Next(_width);
-                        int endCol = rnd.Next(_width);
-
-                        Maze[0, 3 * startCol + 1] = MazeCellType.Start;
-                        Maze[Maze.GetLength(0) - 1, 3 * endCol + 1] = MazeCellType.End;
+                        startRow = 0;
+                        endRow = Maze.GetLength(0) - 1;
+                        startCol = Utilities.MazeColToGridCol(rnd.Next(_width));
+                        endCol = Utilities.MazeColToGridCol(rnd.Next(_width));
                     }
                     break;
                 case 1:
                     {
-                        int startRow = rnd.Next(_height);
-                        int endRow = rnd.Next(_height);
-
-                        Maze[3 * endRow + 1, Maze.GetLength(1) - 1] = MazeCellType.Start;
-                        Maze[3 * startRow + 1, 0] = MazeCellType.End;
+                        startRow = Utilities.MazeRowToGridRow(rnd.Next(_height));
+                        endRow = Utilities.MazeRowToGridRow(rnd.Next(_height));                                                
+                        startCol = Maze.GetLength(1) - 1;
+                        endCol = 0;
                     }
                     break;
                 case 2:
                     {
-                        int startCol = rnd.Next(_width);
-                        int endCol = rnd.Next(_width);
-
-                        Maze[Maze.GetLength(0) - 1, 3 * endCol + 1] = MazeCellType.Start;
-                        Maze[0, 3 * startCol + 1] = MazeCellType.End;
+                        startRow = Maze.GetLength(0) - 1;
+                        endRow = 0;
+                        startCol = Utilities.MazeColToGridCol(rnd.Next(_width));
+                        endCol = Utilities.MazeColToGridCol(rnd.Next(_width));
                     }
                     break;
                 case 3:
                     {
-                        int startRow = rnd.Next(_height);
-                        int endRow = rnd.Next(_height);
+                        startRow = Utilities.MazeRowToGridRow(rnd.Next(_height));
+                        endRow = Utilities.MazeRowToGridRow(rnd.Next(_height));
+                        startCol = 0;
+                        endCol = Maze.GetLength(1) - 1;
 
                         Maze[3 * startRow + 1, 0] = MazeCellType.Start;
                         Maze[3 * endRow + 1, Maze.GetLength(1) - 1] = MazeCellType.End;
@@ -79,6 +83,9 @@ namespace mazelibCSharp.Generate
                     Debug.Assert(false, "Wrong side!");
                     break;
             }
+
+            Maze[startRow, startCol] = MazeCellType.Start;
+            Maze[endRow, endCol] = MazeCellType.End;
 
             return Maze;
         }
