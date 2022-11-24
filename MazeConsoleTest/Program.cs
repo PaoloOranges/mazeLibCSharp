@@ -2,8 +2,8 @@
 using mazelibCSharp.Generate;
 using mazelibCSharp.Solve;
 
-MazeGenAlgo mazeGen = new MazeGenAlgo(5, 5, new AldousBroder());
-MazeSolverAlgo mazeSolver = new MazeSolverAlgo(new DeadEndSolver());
+MazeGenAlgo mazeGen = new MazeGenAlgo(5, 5, GeneratorAlgorithmFactory.GetAldousBorderGenerator());
+MazeSolverAlgo mazeSolver = new MazeSolverAlgo(SolverAlgorithmFactory.GetDeadEndSolver());
 
 
 mazeGen.Generate();

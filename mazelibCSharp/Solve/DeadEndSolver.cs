@@ -1,6 +1,6 @@
 ﻿namespace mazelibCSharp.Solve
 {
-    public class DeadEndSolver : IMazeSolver
+    internal class DeadEndSolver : IMazeSolver
     {
         public List<CellCoordinate> Solve(MazeCellType[,] mazeGrid)
         {
