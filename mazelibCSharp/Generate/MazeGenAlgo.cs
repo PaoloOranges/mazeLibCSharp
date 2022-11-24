@@ -17,6 +17,7 @@ namespace mazelibCSharp.Generate
 
             _algorithm = algorithm;
 
+            Maze = new MazeCellType[0, 0];
         }
 
         /// <summary>

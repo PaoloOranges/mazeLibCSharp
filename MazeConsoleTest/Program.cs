@@ -1,13 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using mazelibCSharp.Generate;
-
-
+using mazelibCSharp.Solve;
 
 MazeGenAlgo mazeGen = new MazeGenAlgo(5, 5, new AldousBroder());
+MazeSolverAlgo mazeSolver = new MazeSolverAlgo(new DeadEndSolver());
+
 
 mazeGen.Generate();
 var result = mazeGen.GenerateEntranceAndExit();
 
+mazeSolver.Solve(result);
 
 for (int r = 0; r < result.GetLength(0); ++r)
 {
