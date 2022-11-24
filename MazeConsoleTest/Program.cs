@@ -37,3 +37,4 @@ for (int r = 0; r < result.GetLength(0); ++r)
     }
     Console.WriteLine();
 }
+
