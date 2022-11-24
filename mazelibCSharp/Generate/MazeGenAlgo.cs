@@ -76,8 +76,8 @@ namespace mazelibCSharp.Generate
                         startCol = 0;
                         endCol = Maze.GetLength(1) - 1;
 
-                        Maze[3 * startRow + 1, 0] = MazeCellType.Start;
-                        Maze[3 * endRow + 1, Maze.GetLength(1) - 1] = MazeCellType.End;
+                        Maze[startRow, 0] = MazeCellType.Start;
+                        Maze[endRow, Maze.GetLength(1) - 1] = MazeCellType.End;
                     }
                     break;
                 default:                   

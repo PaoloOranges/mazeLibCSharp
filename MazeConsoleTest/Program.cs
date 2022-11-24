@@ -7,34 +7,43 @@ MazeSolverAlgo mazeSolver = new MazeSolverAlgo(new DeadEndSolver());
 
 
 mazeGen.Generate();
-var result = mazeGen.GenerateEntranceAndExit();
+var maze = mazeGen.GenerateEntranceAndExit();
 
-mazeSolver.Solve(result);
+var solutionPath = mazeSolver.Solve(maze);
 
-for (int r = 0; r < result.GetLength(0); ++r)
+char[,] outputRender = new char[maze.GetLength(0), maze.GetLength(1)];
+for (int r = 0; r < maze.GetLength(0); ++r)
 {
-    for (int c = 0; c < result.GetLength(1); ++c)
+    for (int c = 0; c < maze.GetLength(1); ++c)
     {
-        switch (result[r, c])
+        switch (maze[r, c])
         {
             case mazelibCSharp.MazeCellType.Start:
-                Console.Write("S");
+                outputRender[r, c] = 'S';                
                 break;
             case mazelibCSharp.MazeCellType.End:
-                Console.Write("E");
+                outputRender[r, c] = 'E';
                 break;
             case mazelibCSharp.MazeCellType.Path:
-                Console.Write(" ");
+                outputRender[r, c] = ' ';
                 break;
             case mazelibCSharp.MazeCellType.Wall:
-                Console.Write("#");
+                outputRender[r, c] = '#';
                 break;
             default:
-                Console.Write("?");
+                outputRender[r, c] = '?';
                 break;
 
         }
+    }    
+}
+
+
+for (int r = 0; r < outputRender.GetLength(0); ++r)
+{
+    for (int c = 0; c < outputRender.GetLength(1); ++c)
+    {
+        Console.Write(outputRender[r, c]);
     }
     Console.WriteLine();
 }
-

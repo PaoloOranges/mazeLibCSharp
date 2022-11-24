@@ -8,8 +8,8 @@
 
             List<CellCoordinate> result = new List<CellCoordinate>();
 
-            int rowCount = mazeGrid.GetLength(0);
-            int colCount = mazeGrid.GetLength(1);
+            int rowCount = mazeGridCopy.GetLength(0);
+            int colCount = mazeGridCopy.GetLength(1);
 
             List<CellCoordinate> deadEnds = new List<CellCoordinate>();
             for (int r = 0; r < rowCount; ++r)
@@ -27,30 +27,30 @@
             {
                 int currentRow = deadEnd.row;
                 int currentCol = deadEnd.col;
-                var neighbourPaths = GetPathsAround(mazeGrid, deadEnd.row, deadEnd.col);
+                var neighbourPaths = GetPathsAround(mazeGridCopy, deadEnd.row, deadEnd.col);
 
                 while (neighbourPaths.Count == 1) // not a junction
                 {
-                    mazeGrid[currentRow, currentCol] = MazeCellType.Wall;
+                    mazeGridCopy[currentRow, currentCol] = MazeCellType.Wall;
 
                     currentRow = neighbourPaths[0].row;
                     currentCol = neighbourPaths[0].col;
 
-                    neighbourPaths = GetPathsAround(mazeGrid, currentRow, currentCol);
+                    neighbourPaths = GetPathsAround(mazeGridCopy, currentRow, currentCol);
                 }
 
             }
 
-            //for (int r = 0; r < rowCount; ++r)
-            //{
-            //    for (int c = 0; c < colCount; ++c)
-            //    {
-            //        if (mazeGridCopy[r, c] == MazeCellType.Path && IsDeadEnd(mazeGridCopy, r, c))
-            //        {
-            //            deadEnds.Add(new CellCoordinate(r, c));
-            //        }
-            //    }
-            //}
+            for (int r = 0; r < rowCount; ++r)
+            {
+                for (int c = 0; c < colCount; ++c)
+                {
+                    if (mazeGridCopy[r, c] == MazeCellType.Path)
+                    {
+                        result.Add(new CellCoordinate(r, c));
+                    }
+                }
+            }
 
             return result;
         }
