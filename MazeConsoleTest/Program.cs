@@ -38,6 +38,10 @@ for (int r = 0; r < maze.GetLength(0); ++r)
     }    
 }
 
+foreach(var cell in solutionPath)
+{
+    outputRender[cell.row, cell.col] = '+';
+}
 
 for (int r = 0; r < outputRender.GetLength(0); ++r)
 {
