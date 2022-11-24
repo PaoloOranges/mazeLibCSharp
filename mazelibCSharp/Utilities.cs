@@ -1,6 +1,6 @@
 ﻿namespace mazelibCSharp
 {
-    public class Utilities
+    internal static class Utilities
     {
         public static int CellWidth { get; } = 3;
         public static int CellHeight { get; } = 3;

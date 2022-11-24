@@ -16,10 +16,9 @@ namespace mazelibCSharp.Generate
         public MazeCellType[,] Generate(int height, int width)
         {
             // each maze cell will be 3x3 
-            int mazeHeight = 3 * height;
-            int mazeWidth = 3 * width;
-            const int step = 3;
-
+            int mazeHeight = Utilities.CellHeight * height;
+            int mazeWidth = Utilities.CellWidth * width;
+            
             MazeCellType[,] grid = new MazeCellType[mazeHeight, mazeWidth];
 
             for (int i = 0; i < mazeHeight; ++i)
