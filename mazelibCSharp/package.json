@@ -1,0 +1,7 @@
+{
+  "name": "com.paoloorange.mazelibcsharp",
+  "version": "0.0.1",
+  "description": "Maze Lib Generator and Solver",
+  "displayName": "Maze Lib CSharp",
+  "unity": "2021.3"
+}
