@@ -2,17 +2,14 @@
 {
     internal static class Utilities
     {
-        public static int CellWidth { get; } = 3;
-        public static int CellHeight { get; } = 3;
-
-        public static int MazeRowToGridRow(int row)
+        public static int MazeRowToGridRow(int row, int cellHeight)
         {
-            return CellHeight * row + 1;
+            return cellHeight * row + 1;
         }
 
-        public static int MazeColToGridCol(int col)
+        public static int MazeColToGridCol(int col, int cellWidth)
         {
-            return CellWidth * col + 1;
+            return cellWidth * col + 1;
         }
     }
 }

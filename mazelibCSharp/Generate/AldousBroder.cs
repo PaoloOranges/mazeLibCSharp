@@ -16,11 +16,11 @@ namespace mazelibCSharp.Generate
         /// highest-level method that implements the maze-generating algorithm
         /// <returns> array returned matrix </returns>
         /// </summary>
-        public MazeCellType[,] Generate(int height, int width)
+        public MazeCellType[,] Generate(int height, int width, int cellHeight, int cellWidth)
         {
             // each maze cell will be 3x3 
-            int mazeHeight = Utilities.CellHeight * height;
-            int mazeWidth = Utilities.CellWidth * width;
+            int mazeHeight = cellHeight * height;
+            int mazeWidth = cellWidth * width;
             
             MazeCellType[,] grid = new MazeCellType[mazeHeight, mazeWidth];
 
@@ -43,7 +43,7 @@ namespace mazelibCSharp.Generate
 
             int totalMazeSize = height * width;
 
-            grid[Utilities.MazeRowToGridRow(currentRow), Utilities.MazeColToGridCol(currentCol)] = MazeCellType.Path;
+            grid[Utilities.MazeRowToGridRow(currentRow, cellHeight), Utilities.MazeColToGridCol(currentCol, cellWidth)] = MazeCellType.Path;
 
             int numVisited = 1;
 
@@ -51,13 +51,13 @@ namespace mazelibCSharp.Generate
             {
                 var neighbours = GetNeighboursCoordinateList(currentRow, currentCol, height, width);
 
-                int row = Utilities.MazeRowToGridRow(currentRow);
-                int col = Utilities.MazeColToGridCol(currentCol);
+                int row = Utilities.MazeRowToGridRow(currentRow, cellHeight);
+                int col = Utilities.MazeColToGridCol(currentCol, cellWidth);
 
                 foreach (var neighbour in neighbours)
                 {
-                    int nR = Utilities.MazeRowToGridRow(neighbour.row);
-                    int nC = Utilities.MazeColToGridCol(neighbour.col);
+                    int nR = Utilities.MazeRowToGridRow(neighbour.row, cellHeight);
+                    int nC = Utilities.MazeColToGridCol(neighbour.col, cellWidth);
 
                     currentRow = neighbour.row;
                     currentCol = neighbour.col;

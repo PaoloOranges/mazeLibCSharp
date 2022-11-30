@@ -6,15 +6,19 @@ namespace mazelibCSharp.Generate
     public class MazeGenAlgo
     {
         private int _height, _width;
+        private int _cellHeight, _cellWidth;
         private IMazeGenerator _algorithm;
 
         public MazeCellType[,] Maze { get; set; }
 
-        public MazeGenAlgo(int h, int w, IMazeGenerator algorithm)
+        public MazeGenAlgo(int height, int width, int cellHeight, int cellWidth, IMazeGenerator algorithm)
         {
-            Debug.Assert(w >= 3 && h >= 3, "Mazes cannot be smaller than 3x3.");
-            _height = h;
-            _width = w;
+            Debug.Assert(width >= 3 && height >= 3, "Mazes cannot be smaller than 3x3.");
+            _height = height;
+            _width = width;
+
+            _cellHeight = cellHeight;
+            _cellWidth = cellWidth;
 
             _algorithm = algorithm;
 
@@ -30,7 +34,7 @@ namespace mazelibCSharp.Generate
         /// </returns>
         public MazeCellType[,] Generate()
         {
-            Maze = _algorithm.Generate(_height, _width);
+            Maze = _algorithm.Generate(_height, _width, _cellHeight, _cellWidth);
             return Maze;
         }
 
@@ -50,14 +54,14 @@ namespace mazelibCSharp.Generate
                     {
                         startRow = 0;
                         endRow = Maze.GetLength(0) - 1;
-                        startCol = Utilities.MazeColToGridCol(rnd.Next(_width));
-                        endCol = Utilities.MazeColToGridCol(rnd.Next(_width));
+                        startCol = Utilities.MazeRowToGridRow(rnd.Next(_width), _cellWidth);
+                        endCol = Utilities.MazeColToGridCol(rnd.Next(_width), _cellWidth);
                     }
                     break;
                 case 1:
                     {
-                        startRow = Utilities.MazeRowToGridRow(rnd.Next(_height));
-                        endRow = Utilities.MazeRowToGridRow(rnd.Next(_height));                                                
+                        startRow = Utilities.MazeRowToGridRow(rnd.Next(_height), _cellHeight);
+                        endRow = Utilities.MazeRowToGridRow(rnd.Next(_height), _cellHeight);                                                
                         startCol = Maze.GetLength(1) - 1;
                         endCol = 0;
                     }
@@ -66,14 +70,14 @@ namespace mazelibCSharp.Generate
                     {
                         startRow = Maze.GetLength(0) - 1;
                         endRow = 0;
-                        startCol = Utilities.MazeColToGridCol(rnd.Next(_width));
-                        endCol = Utilities.MazeColToGridCol(rnd.Next(_width));
+                        startCol = Utilities.MazeColToGridCol(rnd.Next(_width), _cellWidth);
+                        endCol = Utilities.MazeColToGridCol(rnd.Next(_width), _cellWidth);
                     }
                     break;
                 case 3:
                     {
-                        startRow = Utilities.MazeRowToGridRow(rnd.Next(_height));
-                        endRow = Utilities.MazeRowToGridRow(rnd.Next(_height));
+                        startRow = Utilities.MazeRowToGridRow(rnd.Next(_height), _cellHeight);
+                        endRow = Utilities.MazeRowToGridRow(rnd.Next(_height), _cellHeight);
                         startCol = 0;
                         endCol = Maze.GetLength(1) - 1;
 
