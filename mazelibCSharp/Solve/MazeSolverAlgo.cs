@@ -1,4 +1,6 @@
-﻿namespace mazelibCSharp.Solve
+﻿using System.Collections.Generic;
+
+namespace mazelibCSharp.Solve
 {
     public class MazeSolverAlgo
     {

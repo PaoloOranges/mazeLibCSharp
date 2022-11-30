@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace mazelibCSharp.Solve
 {
     public interface IMazeSolver
