@@ -2,7 +2,7 @@
 using mazelibCSharp.Generate;
 using mazelibCSharp.Solve;
 
-MazeGenAlgo mazeGen = new MazeGenAlgo(5, 5, GeneratorAlgorithmFactory.GetAldousBorderGenerator());
+MazeGenAlgo mazeGen = MazeGeneratorFactory.CreateAldousBroderGenerator(5, 5, 3, 3);
 MazeSolverAlgo mazeSolver = new MazeSolverAlgo(SolverAlgorithmFactory.GetDeadEndSolver());
 
 
