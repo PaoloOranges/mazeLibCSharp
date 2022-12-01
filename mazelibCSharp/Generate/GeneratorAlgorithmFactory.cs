@@ -2,9 +2,9 @@
 
 namespace mazelibCSharp.Generate
 {
-    public static class GeneratorAlgorithmFactory
+    internal static class GeneratorAlgorithmFactory
     {
-        static public IMazeGenerator GetAldousBorderGenerator()
+        static internal IMazeGenerator GetAldousBorderGenerator()
         {
             return new AldousBroder();
         }
